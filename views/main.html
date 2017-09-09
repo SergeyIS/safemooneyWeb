@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="uk-background-secondary">
+<html class="uk-background-muted">
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/uikit.min.css" />
@@ -9,20 +9,58 @@
         <script src="../lib/uikit-icons.min.js"></script>
     </head>
     <body>
-        <nav class="uk-navbar-container" uk-navbar>
-            <div class="uk-navbar-left">
-                <div class="uk-width-auto uk-margin-small-right" style="padding: 5px;">
-                    <img class="uk-comment-avatar" src="http://www.pusatgratis.com/wp-content/uploads/2012/11/donottrack_1.jpeg" width="40" height="40" alt="" style="border-radius: 50%;">
-                </div>
-                <h4 class="uk-comment-title uk-margin-remove"><a class="uk-link-reset" href="#">Username</a></h4>
+        <div class="uk-navbar-container tm-navbar-container" style="top: 0px; background-color: white;">
+            <div class="uk-container uk-container-expand">
+                <nav class="uk-navbar">
+                    <div class="uk-navbar-left">
+                        <a href="../" class="uk-navbar-item uk-logo">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="34" viewBox="0 0 512 512">
+                                <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#555555" stroke="none">
+                                    <path d="M1715 5029 c-214 -14 -347 -30 -526 -65 -441 -86 -742 -212 -931
+                                    -392 -115 -109 -158 -206 -158 -352 0 -95 0 -96 32 -127 190 -178 676 -331
+                                    1258 -397 500 -57 1121 -44 1606 34 448 72 844 216 1002 363 32 31 32 32 32
+                                    127 0 147 -43 243 -158 353 -312 297 -1000 471 -1837 466 -110 -1 -254 -5
+                                    -320 -10z"/>
+                                    <path d="M100 3441 l0 -380 43 -34 c172 -141 477 -255 903 -336 135 -26 405
+                                    -64 410 -58 1 1 14 26 28 55 128 254 403 552 643 697 l53 32 -287 6 c-159 4
+                                    -353 13 -433 21 -537 54 -993 173 -1261 326 -48 28 -89 50 -93 50 -3 0 -6
+                                    -171 -6 -379z"/>
+                                    <path d="M3932 3771 c-46 -27 -133 -68 -193 -92 l-109 -42 115 -34 c64 -18
+                                    150 -49 192 -68 42 -19 80 -35 84 -35 5 0 9 72 9 160 0 88 -3 160 -7 160 -5 0
+                                    -46 -22 -91 -49z"/>
+                                    <path d="M3080 3534 c-19 -2 -78 -9 -130 -15 -412 -47 -831 -268 -1108 -582
+                                    -473 -537 -540 -1304 -168 -1905 454 -732 1409 -1028 2220 -688 896 376 1298
+                                    1369 895 2212 -242 508 -745 872 -1323 959 -102 15 -325 26 -386 19z m220
+                                    -708 l5 -88 73 -19 c155 -39 269 -131 337 -273 19 -40 35 -78 35 -83 0 -9 -58
+                                    -34 -227 -99 l-62 -24 -37 71 c-57 108 -129 159 -224 159 -120 0 -206 -94
+                                    -186 -203 13 -72 58 -101 293 -188 286 -107 392 -180 456 -316 27 -58 32 -82
+                                    35 -164 2 -52 -1 -121 -8 -152 -38 -187 -195 -331 -407 -374 l-82 -17 -3 -116
+                                    -3 -115 -105 0 -105 0 -3 116 -3 116 -67 12 c-107 19 -219 79 -287 153 -60 65
+                                    -127 188 -140 259 l-7 35 146 37 c180 46 182 46 191 5 10 -46 42 -108 74 -141
+                                    43 -47 98 -70 181 -75 163 -9 250 55 250 185 0 99 -43 130 -300 222 -282 101
+                                    -369 160 -437 299 -35 69 -38 83 -41 178 -5 126 17 210 79 303 69 103 172 170
+                                    300 194 l59 12 0 86 c0 47 3 89 7 93 4 4 52 5 107 4 l101 -3 5 -89z"/>
+                                    <path d="M100 2381 l0 -379 52 -46 c122 -107 434 -232 748 -301 158 -34 387
+                                    -71 395 -63 3 3 1 38 -5 79 -27 211 -3 474 66 700 4 14 -12 18 -103 28 -119
+                                    13 -395 67 -543 106 -194 51 -408 137 -534 213 -37 23 -70 42 -72 42 -2 0 -4
+                                    -171 -4 -379z"/>
+                                    <path d="M100 1367 c0 -304 2 -339 19 -390 76 -221 383 -416 841 -536 298 -78
+                                    616 -119 990 -127 l235 -6 -48 32 c-236 153 -450 367 -587 590 -58 94 -137
+                                    257 -164 337 l-17 51 -52 7 c-495 65 -890 182 -1145 337 -34 21 -65 38 -67 38
+                                    -3 0 -5 -150 -5 -333z"/>
+                                </g>
+                            </svg> 
+                            <p class="uk-margin-small-left">SafeMooney</p>
+                        </a>
+                    </div>
+                    <div class="uk-navbar-right">
+                        <ul class="uk-navbar-nav">
+                            <li><a href="#">Notifications</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">LogOut</a></li>
+                        </ul>
+                </nav>
             </div>
-            <div class="uk-navbar-right uk-padding-small">
-                <ul class="uk-iconnav">
-                    <li class="uk-margin-small-right"><a href="#" uk-icon="icon: bell"></a></li>
-                    <li class="uk-margin-small-right"><a href="#" uk-icon="icon: settings"></a></li>
-                    <li><a href="#" uk-icon="icon: sign-out"></a></li>
-                </ul>
-            </div>
-        </nav>
+        </div>
     </body>
 </html>

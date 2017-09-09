@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="uk-background-secondary" ng-app="mainApp">
+<html class="uk-background-muted" ng-app="mainApp">
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/uikit.min.css" />
@@ -12,25 +12,46 @@
         <script src="../controllers/signinController.js"></script>
     </head>
     <body>
-        <h1 class="uk-text-lead uk-text-muted">/Sign In page</h1>
-        <form class="uk-align-center uk-width-1-4 uk-padding-small" ng-controller="signinController">
+        <form class="uk-align-center uk-width-1-4 uk-padding-small" ng-controller="signinController" style="margin-top: 5%">
+            
+            <div class="uk-text-lead uk-text-large uk-text-center">Sign In</div>
+            
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" uk-icon="icon: user"></span>
-                    <input class="uk-input" type="text" ng-model="form.username" >
+                    <input class="uk-input" type="text" ng-model="form.username" placeholder="Username" required>
                 </div>
             </div>
         
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon " uk-icon="icon: lock"></span>
-                    <input class="uk-input" type="password" ng-model="form.password" > 
+                    <input class="uk-input" type="password" ng-model="form.password" placeholder="Password" required> 
                 </div>
             </div>
         
             <button class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" ng-click="signIn(form)">Sign In</button>
 
-            <a class="uk-link-muted uk-margin-small-top uk-text-center uk-align-center" href="">Sign Up</a>
+            <div class="uk-margin-small-top">
+                <a class="uk-link-muted uk-margin-small-top uk-text-center uk-align-center" href="signup.html" style="display: inline">Sign Up</a>
+
+                <div class="uk-margin-small-bottom uk-align-right" style="display: inline">
+                    <div class="uk-animation-toggle"  style="display: inline">
+                        <span class="uk-icon uk-icon-image uk-animation-slide-bottom-small" style="background-image: url(../res/f.png); width: 30px; height: 30px;"></span>
+                    </div>
+                    <div class="uk-animation-toggle"  style="display: inline">
+                        <span class="uk-icon uk-icon-image uk-margin-small-left uk-animation-slide-bottom-small" style="background-image: url(../res/g+.png); width: 30px; height: 30px;"></span>
+                    </div>
+                    <div class="uk-animation-toggle"  style="display: inline">
+                        <span class="uk-icon uk-icon-image uk-margin-small-left uk-animation-slide-bottom-small" style="background-image: url(../res/vk.png); width: 30px; height: 30px;"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="uk-text-meta uk-margin-medium-top">
+                If you have any questions or suggestions, please let us know <a>support@mail.com</a>
+            </div>
+
         </form>
     </body>
 </html>
