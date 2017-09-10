@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="uk-background-muted">
+<html class="uk-background-muted" ng-app="mainApp">
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/uikit.min.css" />
@@ -7,8 +7,11 @@
         <script src="../lib/jquery.js"></script>
         <script src="../lib/uikit.min.js"></script>
         <script src="../lib/uikit-icons.min.js"></script>
+        <script src="../lib/angular.min.js"></script>
+        <script src="../app/app.js"></script>
+        <script src="../controllers/mainController.js"></script>
     </head>
-    <body>
+    <body ng-controller="mainController">
         <div class="uk-navbar-container tm-navbar-container" style="top: 0px; background-color: white;">
             <div class="uk-container uk-container-expand">
                 <nav class="uk-navbar">
@@ -57,7 +60,7 @@
                         <ul class="uk-navbar-nav">
                             <li><a href="#">Notifications</a></li>
                             <li><a href="#">Settings</a></li>
-                            <li><a href="#">LogOut</a></li>
+                            <li><a href="#" ng-mousedown="logOut()">{{captions.logout}}</a></li>
                         </ul>
                 </nav>
             </div>
