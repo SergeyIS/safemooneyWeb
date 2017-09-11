@@ -1,5 +1,5 @@
 var mainApp = angular.module("mainApp");
-mainApp.controller("mainController", function($scope)
+mainApp.controller("mainController", function($scope, dataService)
 {
     $scope.logOut = function()
     {
@@ -14,7 +14,7 @@ mainApp.controller("mainController", function($scope)
             {
                 xhr.setRequestHeader('Authorization', 'Basic ' + token);
             },
-            success: function (data) 
+            success: function (data)
             {
                 location.href = "signin.html";
             },
@@ -31,4 +31,7 @@ mainApp.controller("mainController", function($scope)
             }
         });
     }
+
+    $scope.transactions = dataService.transactions;
+    
 });
