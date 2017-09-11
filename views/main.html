@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="uk-background-muted" ng-app="mainApp">
+<html class="uk-background-muted" ng-app="mainApp" style="background-color: rgb(240, 240, 240)">
     <head>
         <title></title>
         <link rel="stylesheet" href="../css/uikit.min.css" />
@@ -60,29 +60,58 @@
                         <ul class="uk-navbar-nav">
                             <li><a href="#">Notifications</a></li>
                             <li><a href="#">Settings</a></li>
-                            <li><a href="#" ng-mousedown="logOut()">{{captions.logout}}</a></li>
+                            <li><a href="#" ng-mousedown="logOut()">LogOut</a></li>
                         </ul>
                 </nav>
             </div>
         </div>
 
-
         <div class="uk-text-center" uk-grid style="padding: 50px 10px;">
             <div class="uk-width-1-3">
-                <div>
-                    <div class="uk-width-2-3">
-                        <form class="uk-search uk-search-default">
+                        <form class="uk-search uk-search-default uk-width-1 uk-card uk-card-default">
                             <span uk-search-icon></span>
                             <input class="uk-search-input" type="search" placeholder="Search...">
                         </form>
-                    </div>
-                </div>
+                        <div class="uk-grid-small uk-flex-middle" uk-grid style="margin-top: 30px;">
+                            <div class="" style="width: 50px; padding: 2px; margin-top: 0">
+                                <div class="uk-animation-toggle" >
+                                    <div class="uk-animation-scale-down">
+                                        <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;"></div>
+                                    </div>
+                                </div>
+                                <div class="uk-animation-toggle" >
+                                    <div class="uk-animation-scale-down">
+                                        <div class="uk-card uk-card-default"  uk-icon="icon: ban" style="padding: 2px; margin: 5% 0;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-expand" style="padding: 0">
+                            <div class="uk-card uk-card-default">
+                            <div class="uk-card-header" style="padding: 5px 20px">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">
+                                        <div style="text-align:justify">
+                                            <h4 class="uk-text-small" style="display: inline; margin-left: auto;">@Username</h4>
+                                        </div>          
+                                        <div style="text-align:justify">
+                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+                                        </div>          
+                                        
+                                    </div>
+                                    <div class="uk-width-auto">
+                                        <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
             </div>
             <div class="uk-width-1-3">
                 <div class="uk-margin-small-bottom" uk-grid>
                     <div class="uk-width-expand"> 
                         <div class="uk-card uk-card-default">
-                            <div class="uk-card-header">
+                            <div class="uk-card-header" style="padding: 5px 20px">
                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                                     <div class="uk-width-expand">  
                                         <div style="text-align:justify">
@@ -100,8 +129,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-card-body">
-                                <p>Commet</p>
+                            <div class="uk-card-body uk-text-small uk-text-meta">
+                                <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
                             </div>
                         </div>
                     </div>
@@ -122,12 +151,34 @@
                             </div>
                         </div>    
                     </div>
-                </div>
-                
+                </div>    
             </div>
             
             <div class="uk-width-1-3">
-                <div>details</div>
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div style="width: 50px; padding: 2px;" >
+                                <div class="uk-animation-toggle" >
+                                    <div class="uk-animation-scale-down">
+                                        <div class="uk-card uk-card-default"  uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+                                    </div>
+                                </div>
+                                <div class="uk-animation-toggle" >
+                                    <div class="uk-animation-scale-down">
+                                        <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; height: 33%; margin: 5% 0;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="uk-card uk-card-default uk-width-expand">  
+                                <div style="text-align:justify">
+                                    <h4 class="uk-text-small" style="display: inline; margin-left: auto;">Petr Petrov</h4>
+                                    <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">15.34$</span>
+                                </div>          
+                                <div style="text-align:justify">
+                                    <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">April 01, 2016</time></p>
+                                </div>          
+                            </div>
+                        </div>
             </div>
     </body>
 </html>

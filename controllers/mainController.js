@@ -1,7 +1,6 @@
 var mainApp = angular.module("mainApp");
 mainApp.controller("mainController", function($scope)
 {
-    $scope.captions = {logout: "LogOut"};
     $scope.logOut = function()
     {
         var id = localStorage.getItem("userId");
