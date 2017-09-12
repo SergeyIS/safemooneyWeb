@@ -18,7 +18,7 @@
                 <nav class="uk-navbar">
                     <div class="uk-navbar-left">
                         <a href="../" class="uk-navbar-item uk-logo">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="28" height="34" viewBox="0 0 512 512">
+                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="38" height="44" viewBox="0 0 512 512">
                                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#555555" stroke="none">
                                     <path d="M1715 5029 c-214 -14 -347 -30 -526 -65 -441 -86 -742 -212 -931
                                     -392 -115 -109 -158 -206 -158 -352 0 -95 0 -96 32 -127 190 -178 676 -331
@@ -54,7 +54,11 @@
                                     -3 0 -5 -150 -5 -333z"/>
                                 </g>
                             </svg> 
-                            <p class="uk-margin-small-left">SafeMooney</p>
+                            <div class="uk-margin-small-left">
+                                <p style="margin: 0; padding: 0">SafeMooney</p>
+                                <p class="uk-text-meta" style="margin:0; padding: 0">The easiest way to manage your debts</p>
+                            </div>
+                            
                         </a>
                     </div>
                     <div class="uk-navbar-right">
@@ -62,6 +66,19 @@
                             <li><a href="#">Notifications</a></li>
                             <li><a href="#">Settings</a></li>
                             <li><a href="#" ng-mousedown="logOut()">LogOut</a></li>
+                            <li>
+                                <a class="uk-float-right">Language</a>
+                                <div uk-dropdown="pos: bottom-justify">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li class="uk-active">English</li>
+                                        <li><a href="#">中國</a></li>
+                                        <li><a href="#">Español</a></li>
+                                        <li><a href="#">Russian</a></li>
+                                        <li><a href="#">Français</a></li>
+                                        <li><a href="#">Deutsche</a></li>   
+                                    </ul>
+                                </div>
+                            </li>
                         </ul>
                 </nav>
             </div>
@@ -69,16 +86,21 @@
 
         <div class="uk-text-center" uk-grid style="padding: 50px 10px;">
             <div class="uk-width-1-3" >
-                <form class="uk-search uk-search-default uk-width-1 uk-card uk-card-default">
+                <form class="uk-search uk-search-default uk-width-1 uk-card uk-card-default uk-card-hover">
                     <span uk-search-icon></span>
-                    <input class="uk-search-input" type="search" placeholder="Search...">
+                    <input class="uk-search-input" type="search" placeholder="Search..." style="height: 40px;">
                 </form>
-                <div bind-connect="userlistConf" style="margin-top: 30px;">
-
-                </div>
+                <div bind-connect="userlistConf" style="margin-top: 30px;"></div>
             </div>
-            <div class="uk-width-1-3" bind-connect="transConf"></div>
-            <div class="uk-width-1-3" bind-connect="notifyConf"></div>
+            
+            <div class="uk-width-1-3" >
+                <div class="uk-card uk-card-default uk-text-meta uk-card-hover" title="The total amount of money being transferred into and out from your friends" uk-tooltip style="height: 40px; padding: 10px 20px"><span uk-icon="icon: list" style="margin-right: 20px"></span>Сash flows</div>
+                <div uk-sortable="handle: .uk-card" bind-connect="transConf" style="margin-top: 30px;"></div>
+            </div>
+            <div class="uk-width-1-3">
+                <div class="uk-card uk-card-default uk-text-meta uk-card-hover" title="Informing that someone wants to lend you money" uk-tooltip style="height: 40px; padding: 10px 20px"><span uk-icon="icon: heart" style="margin-right: 20px"></span>Notifications</div>
+                <div uk-sortable="handle: .uk-card" bind-connect="notifyConf" style="margin-top: 30px;"></div>
+            </div>
         </div>
 
         <!---->
@@ -127,6 +149,9 @@
                             <div class="uk-grid-small uk-flex-middle" uk-grid>
                                 <div class="uk-width-expand">  
                                     <div style="text-align:justify">
+                                        <div>
+                                            
+                                        </div>
                                         <h4 class="uk-card-title" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
                                         <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${count}</span>
                                     </div>
@@ -142,7 +167,9 @@
                             </div>
                         </div>
                         <div class="uk-card-body uk-text-small uk-text-meta">
-                            <p>${comment}</p>
+                            <p>${comment}
+                                Раздел машинного обучения, с одной стороны, образовался в результате разделения науки о нейросетях на методы обучения сетей и виды топологий их архитектуры, с другой стороны - вобрал в себя методы математической статистики.
+                            </p>
                         </div>
                     </div>
                 </div>
