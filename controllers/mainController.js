@@ -1,5 +1,5 @@
 var mainApp = angular.module("mainApp");
-mainApp.controller("mainController", function($scope, dataService)
+mainApp.controller("mainController", function($scope)
 {
     $scope.logOut = function()
     {
@@ -32,6 +32,57 @@ mainApp.controller("mainController", function($scope, dataService)
         });
     }
 
-    $scope.transactions = dataService.transactions;
-    
+    $scope.transConf = {
+        isDataChanged: true,
+        template: $('#transactionTempl'),
+        data: [
+            {
+                firstname: "Petr",
+                lastname: "Petrov",
+                count: "12.34$",
+                date: "12.09.2017"
+            },
+            {
+                firstname: "Ivan",
+                lastname: "Petrov",
+                count: "12.34$",
+                date: "12.09.2017"
+            }
+        ]
+    };
+    $scope.notifyConf = {
+        isDataChanged: true,
+        template: $('#notificationTempl'),
+        data: [
+            {
+                firstname: "Petr",
+                lastname: "Petrov",
+                count: "12.34$",
+                date: "12.09.2017"
+            },
+            {
+                firstname: "Ivan",
+                lastname: "Petrov",
+                count: "12.34$",
+                date: "12.09.2017"
+            }
+        ]
+    };
+
+    $scope.userlistConf = {
+        isDataChanged: true,
+        template: $('#userlistTempl'),
+        data: [
+            {
+                firstname: "Petr",
+                lastname: "Petrov",
+                username: "Petro"
+            },
+            {
+                firstname: "Ivan",
+                lastname: "Petrov",
+                username: "IvanPetrov"
+            }
+        ]
+    };
 });
