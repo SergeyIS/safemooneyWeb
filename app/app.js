@@ -1,11 +1,9 @@
 var mainApp = angular.module("mainApp", []);
-
 //data binding directive
 mainApp.directive("bindConnect", function()
 {
     return function(scope, element, attrs) {
-        
-        var conf = scope[attrs["bindConnect"]];
+        var conf = dataheap[attrs["bindConnect"]];
 
         setInterval(function()
         {
@@ -13,16 +11,20 @@ mainApp.directive("bindConnect", function()
                 return;
 
             //check for properties
-            if(!(("isDataChanged" in conf) & ("data" in conf) & ("template" in conf)))
+            if(!(("isDataChanged" in conf) & ("data" in conf) & ("templateId" in conf)))
                 return;
 
             if(conf.isDataChanged)
             {
-                if(conf.data == null || conf.data == undefined || conf.template == null || conf.template == undefined)
+                if(conf.data == null)
+                    element.empty();
+
+                if(conf.data == undefined || conf.templateId == null || conf.templateId == undefined)
                     return;
 
                 element.empty();
-                conf.template.tmpl(conf.data).appendTo(element);
+                var ui = $(conf.templateId);
+                ui.tmpl(conf.data).appendTo(element);
                 conf.isDataChanged = false;
             }
             
