@@ -64,6 +64,9 @@ var dataheap = {
     },
     search: function(text, auth)
     {
+        //start animation
+        $("#loader").removeClass("hide");
+        
         $.ajax({
             url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/getuserlist",
             type: 'GET',
@@ -76,6 +79,7 @@ var dataheap = {
             {
                 searchObject.isDataChanged = true;
                 searchObject.data = data;
+                $("#loader").addClass("hide");
             },
             error: function (jqXHR, textStatus, errorThrown) 
             {
@@ -92,6 +96,7 @@ var dataheap = {
                 {
                     searchObject.isDataChanged = true;
                     searchObject.data = jqXHR.responseText;
+                    $("#loader").addClass("hide");
                 }
             }
         });

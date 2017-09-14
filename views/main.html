@@ -23,7 +23,6 @@
                         timer = setTimeout(function() {
                             fn.apply(ctx || that, args);
                         }, delay);
-                        $("#loader").removeClass("hide");
                     };
                 };
             })(Function.prototype);
@@ -32,7 +31,6 @@
             function test() {
                 var auth = {userId: localStorage.getItem("userId"), token: localStorage.getItem("token")};
                 dataheap.search(input.value, auth);
-                $("#loader").addClass("hide");
                 setTimeout(function(){
                     dataheap.cleanSrc();
                 }, 10000);
@@ -129,6 +127,7 @@
                 <div id="loader" class="uk-width-auto hide">
                     <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
                 </div>
+                
                 <div id="usrContainer" bind-connect="searchData" style="margin-top: 30px;"></div>
             </div>
             

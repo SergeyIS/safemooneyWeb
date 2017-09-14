@@ -14,6 +14,7 @@ mainApp.directive("bindConnect", function()
             if(!(("isDataChanged" in conf) & ("data" in conf) & ("templateId" in conf)))
                 return;
 
+            
             if(conf.isDataChanged)
             {
                 if(conf.data == null)
