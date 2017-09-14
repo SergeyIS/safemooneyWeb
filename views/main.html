@@ -30,11 +30,11 @@
             window.addEventListener('DOMContentLoaded', function() {
             var input = document.querySelector('#srcPanel');
             function test() {
-                dataheap.search(this.value);
+                var auth = {userId: localStorage.getItem("userId"), token: localStorage.getItem("token")};
+                dataheap.search(input.value, auth);
                 $("#loader").addClass("hide");
                 setTimeout(function(){
                     dataheap.cleanSrc();
-                    var e = dataheap;
                 }, 10000);
             }
             input.addEventListener('input', test.debounce(500));
@@ -163,10 +163,10 @@
                     <div class="uk-grid-small uk-flex-middle" uk-grid>
                         <div class="uk-width-expand">
                             <div style="text-align:justify">
-                                <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
+                                <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
                             </div>          
                             <div style="text-align:justify">
-                                <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${username}</p>
+                                <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${Username}</p>
                             </div>          
                             
                         </div>

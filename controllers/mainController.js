@@ -8,7 +8,7 @@ mainApp.controller("mainController", function($scope)
         var token = localStorage.getItem("token");
         
         $.ajax({
-            url: 'http://safemooney.azurewebsites.net/api/' + id + '/account/logout/',
+            url: "http://safemooney.azurewebsites.net/api/"+id+"/account/logout",
             type: 'GET',
             dataType: 'json',
             beforeSend: function (xhr, settings) 

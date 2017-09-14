@@ -62,29 +62,42 @@ var dataheap = {
             ];
         }, 5000);
     },
-    search: function(text)
+    search: function(text, auth)
     {
-        searchObject.isDataChanged = true;
-        searchObject.data = [
+        $.ajax({
+            url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/getuserlist",
+            type: 'GET',
+            dataType: 'json',
+            beforeSend: function (xhr, settings) 
             {
-                username: Math.round(Math.random()*100),
-                firstname: "firstname1",
-                lastname: "lastname1"
+                xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
             },
+            success: function (data)
             {
-                username: Math.round(Math.random()*100),
-                firstname: "firstname2",
-                lastname: "lastname2"
+                searchObject.isDataChanged = true;
+                searchObject.data = data;
             },
+            error: function (jqXHR, textStatus, errorThrown) 
             {
-                username: Math.round(Math.random()*100),
-                firstname: "firstname3",
-                lastname: "lastname3"
+                if(jqXHR.status == 404)
+                {
+                    searchObject.isDataChanged = true;
+                    searchObject.data = null;
+                }
+                else if(jqXHR.status != 200)
+                {
+                    alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                }
+                else
+                {
+                    searchObject.isDataChanged = true;
+                    searchObject.data = jqXHR.responseText;
+                }
             }
-        ]
+        });
     },
 
-    cleanSrc: function(){searchObject.data = null; searchObject.isDataChanged = true;}
+    cleanSrc: function(){ searchObject.data = null; searchObject.isDataChanged = true; }
 };
 
 
