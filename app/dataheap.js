@@ -21,45 +21,41 @@ var dataheap = {
     transactData: transactDataObject,
     notifyData: notifyDataObject,
     searchData: searchObject,
-    startListening: function(authData) //Listen server for transactions and notifications
+    startListening: function(auth) //Listen server for transactions and notifications
     {
         setInterval(function()
         {
-            transactDataObject.isDataChanged = true;
-            transactDataObject.data = [
+            $.ajax({
+                url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/fetch",
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function (xhr, settings) 
                 {
-                    username: "Username1",
-                    firstname: "firstname1",
-                    lastname: "lastname1",
-                    count: Math.round(Math.random()*100)+"$",
-                    date: "13.09.2017"
+                    xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
                 },
+                success: function (data)
                 {
-                    username: "Username2",
-                    firstname: "firstname2",
-                    lastname: "lastname2",
-                    count: Math.round(Math.random()*100)+"$",
-                    date: "13.09.2017"
-                }
-            ];
-
-            notifyDataObject.isDataChanged = true;
-            notifyDataObject.data = [
-                {
-                    username: "Username1",
-                    firstname: "firstname1",
-                    lastname: "lastname1",
-                    count: "123.45$",
-                    date: "13.09.2017"
+                    transactDataObject.isDataChanged = true;
+                    transactDataObject.data = data;
                 },
+                error: function (jqXHR, textStatus, errorThrown) 
                 {
-                    username: "Username2",
-                    firstname: "firstname2",
-                    lastname: "lastname2",
-                    count: "123.45$",
-                    date: "13.09.2017"
+                    if(jqXHR.status == 404)
+                    {
+                        transactDataObject.isDataChanged = true;
+                        transactDataObject.data = null;
+                    }
+                    else if(jqXHR.status != 200)
+                    {
+                        alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    }
+                    else
+                    {
+                        transactDataObject.isDataChanged = true;
+                        transactDataObject.data = jqXHR.responseText;
+                    }
                 }
-            ];
+            });
         }, 5000);
     },
     search: function(text, auth)
@@ -68,7 +64,7 @@ var dataheap = {
         $("#loader").removeClass("hide");
         
         $.ajax({
-            url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/getuserlist",
+            url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/getuserlist?search="+text,
             type: 'GET',
             dataType: 'json',
             beforeSend: function (xhr, settings) 

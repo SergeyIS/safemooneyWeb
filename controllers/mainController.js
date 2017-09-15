@@ -1,7 +1,7 @@
 var mainApp = angular.module("mainApp");
 mainApp.controller("mainController", function($scope)
 {
-    dataheap.startListening();
+    dataheap.startListening({userId: localStorage.getItem("userId"), token: localStorage.getItem("token")});
     $scope.logOut = function()
     {
         var id = localStorage.getItem("userId");

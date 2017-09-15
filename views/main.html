@@ -142,121 +142,146 @@
         </div>
 
         <!---->
-        <script id="usrTmpl", type="text/x-jquery-tmpl">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                <div class="" style="width: 50px; padding: 2px; margin-top: 0">
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;"></div>
-                        </div>
-                    </div>
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: ban" style="padding: 2px; margin: 5% 0;"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-width-expand" style="padding: 0">
-                <div class="uk-card uk-card-default">
-                <div class="uk-card-header" style="padding: 5px 20px">
-                    <div class="uk-grid-small uk-flex-middle" uk-grid>
-                        <div class="uk-width-expand">
-                            <div style="text-align:justify">
-                                <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
-                            </div>          
-                            <div style="text-align:justify">
-                                <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${Username}</p>
-                            </div>          
-                            
-                        </div>
-                        <div class="uk-width-auto">
-                            <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-        </script>
-
-        <script id="trlTmp", type="text/x-jquery-tmpl">
-            <div class="uk-margin-small-bottom" uk-grid>
-                <div class="uk-width-expand"> 
-                    <div class="uk-card uk-card-default">
-                        <div class="uk-card-header" style="padding: 5px 20px">
-                            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                                <div class="uk-width-expand">  
-                                    <div style="text-align:justify">
-                                        <div>
-                                            
-                                        </div>
-                                        <h4 class="uk-card-title" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
-                                        <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${count}</span>
-                                    </div>
-                                    <div style="text-align:justify">
-                                        <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${date}</time></p>
-                                        <span class="uk-margin-small-right" style="display: inline; float: right">details</span>
-                                    </div>          
-                                    
-                                </div>
-                                <div class="uk-width-auto">
-                                    <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
-                                </div>
+        <div style="display: none">
+            <script id="usrTmpl" type="text/x-jquery-tmpl">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div class="" style="width: 50px; padding: 2px; margin-top: 0">
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;"></div>
                             </div>
                         </div>
-                        <div class="uk-card-body uk-text-small uk-text-meta">
-                            <p>${comment}
-                                Раздел машинного обучения, с одной стороны, образовался в результате разделения науки о нейросетях на методы обучения сетей и виды топологий их архитектуры, с другой стороны - вобрал в себя методы математической статистики.
-                            </p>
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: ban" style="padding: 2px; margin: 5% 0;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-width-expand" style="padding: 0">
+                    <div class="uk-card uk-card-default">
+                    <div class="uk-card-header" style="padding: 5px 20px">
+                        <div class="uk-grid-small uk-flex-middle" uk-grid>
+                            <div class="uk-width-expand">
+                                <div style="text-align:justify">
+                                    <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
+                                </div>          
+                                <div style="text-align:justify">
+                                    <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${Username}</p>
+                                </div>          
+                                
+                            </div>
+                            <div class="uk-width-auto">
+                                <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div style="width: 50px; margin-left: 5px; padding: 2px;" >
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+                </div>
+                </div>
+            </script>
+    
+            <div id="trlTmp" type="text/x-jquery-tmpl">
+                <div class="uk-margin-small-bottom" uk-grid>
+                    <div class="uk-width-expand"> 
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-header" style="padding: 5px 20px">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">  
+                                        <div style="text-align:justify">
+                                            <div>
+                                                
+                                            </div>
+                                            <h4 class="uk-card-title" style="display: inline; margin-left: auto;">${userData.FirstName} ${userData.LastName}</h4>
+                                            <span id="lb-${transactionData.Id}" class="uk-label" style="display: inline; margin: auto 10px;">${transactionData.Count}</span>
+                                        </div>
+                                        <div style="text-align:justify">
+                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${transactionData.Date}</time></p>
+                                            <span class="uk-margin-small-right" style="display: inline; float: right">details</span>
+                                            
+                                        </div>          
+                                        
+                                    </div>
+                                    <div class="uk-width-auto">
+                                        <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-card-body uk-text-small uk-text-meta">
+                                <p>${comment}
+                                    Раздел машинного обучения, с одной стороны, образовался в результате разделения науки о нейросетях на методы обучения сетей и виды топологий их архитектуры, с другой стороны - вобрал в себя методы математической статистики.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; height: 33%; margin: 10% 0;"></div>
+                    <div style="width: 50px; margin-left: 5px; padding: 2px;" >
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+                            </div>
                         </div>
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; height: 33%; margin: 10% 0;"></div>
+                            </div>
+                        </div>
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px; height: 30%"></div>
+                            </div>
+                        </div>    
                     </div>
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px; height: 30%"></div>
-                        </div>
-                    </div>    
+
+                    <div id="usr1-${transactionData.User1Id}" style="display:none">${transactionData.User1Id}</div>
+                    <div id="usr2-${transactionData.User2Id}" style="display:none">${transactionData.User2Id}</div>
+                    <div id="to-${userData.UserId}" style="display:none">${userData.UserId}</div>
+                    <script>
+                        function changeColor()
+                        {
+                            var usr1 = $("#usr1-${transactionData.User1Id}").text();
+                            var usr2 = $("#usr2-${transactionData.User2Id}").text();
+                            var to = $("#to-${userData.UserId}").text();
+                            if(to == usr1)
+                            {
+                                $("#lb-${transactionData.Id}").addClass("uk-label-success");
+                            }
+                            else
+                            {
+                                $("#lb-${transactionData.Id}").addClass("uk-label-warning");
+                            }
+                        }
+                        changeColor();
+                    </script>
                 </div>
             </div>
-        </script>
-
-        <script id="ntfTmpl", type="text/x-jquery-tmpl">
-            <div class="uk-grid-small uk-flex-middle" uk-grid>
-                <div style="width: 50px; padding: 2px;" >
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+    
+            <script id="ntfTmpl" type="text/x-jquery-tmpl">
+                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                    <div style="width: 50px; padding: 2px;" >
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+                            </div>
+                        </div>
+                        <div class="uk-animation-toggle" >
+                            <div class="uk-animation-scale-down">
+                                <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; height: 33%; margin: 5% 0;"></div>
+                            </div>
                         </div>
                     </div>
-                    <div class="uk-animation-toggle" >
-                        <div class="uk-animation-scale-down">
-                            <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; height: 33%; margin: 5% 0;"></div>
-                        </div>
+    
+                    <div class="uk-card uk-card-default uk-width-expand">  
+                        <div style="text-align:justify">
+                            <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
+                            <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${count}</span>
+                        </div>          
+                        <div style="text-align:justify">
+                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${date}</time></p>
+                        </div>          
                     </div>
                 </div>
-
-                <div class="uk-card uk-card-default uk-width-expand">  
-                    <div style="text-align:justify">
-                        <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
-                        <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${count}</span>
-                    </div>          
-                    <div style="text-align:justify">
-                        <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${date}</time></p>
-                    </div>          
-                </div>
-            </div>
-        </script>
+            </script>
+        </div>
+        
         <!---->
     </body>
 </html>
