@@ -52,7 +52,7 @@
                 <nav class="uk-navbar">
                     <div class="uk-navbar-left">
                         <a href="../" class="uk-navbar-item uk-logo">
-                            <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="38" height="44" viewBox="0 0 512 512">
+                            <!-- <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="38" height="44" viewBox="0 0 512 512">
                                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" fill="#555555" stroke="none">
                                     <path d="M1715 5029 c-214 -14 -347 -30 -526 -65 -441 -86 -742 -212 -931
                                     -392 -115 -109 -158 -206 -158 -352 0 -95 0 -96 32 -127 190 -178 676 -331
@@ -87,12 +87,14 @@
                                     257 -164 337 l-17 51 -52 7 c-495 65 -890 182 -1145 337 -34 21 -65 38 -67 38
                                     -3 0 -5 -150 -5 -333z"/>
                                 </g>
-                            </svg> 
+                            </svg>  -->
+                            <div class="uk-background-cover uk-height-medium uk-panel uk-flex uk-flex-center uk-flex-middle" 
+                            style="background-image: url(../res/logo.png); width: 38px; height: 44px">
+                            </div>
                             <div class="uk-margin-small-left">
                                 <p style="margin: 0; padding: 0">SafeMooney</p>
                                 <p class="uk-text-meta" style="margin:0; padding: 0">The easiest way to manage your debts</p>
                             </div>
-                            
                         </a>
                     </div>
                     <div class="uk-navbar-right">
@@ -238,7 +240,6 @@
                         function changeColor()
                         {
                             var usr1 = $("#usr1-${transactionData.User1Id}").text();
-                            var usr2 = $("#usr2-${transactionData.User2Id}").text();
                             var to = $("#to-${userData.UserId}").text();
                             if(to == usr1)
                             {
@@ -254,7 +255,7 @@
                 </div>
             </div>
     
-            <script id="ntfTmpl" type="text/x-jquery-tmpl">
+            <div id="ntfTmpl" type="text/x-jquery-tmpl">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div style="width: 50px; padding: 2px;" >
                         <div class="uk-animation-toggle" >
@@ -271,15 +272,15 @@
     
                     <div class="uk-card uk-card-default uk-width-expand">  
                         <div style="text-align:justify">
-                            <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${firstname} ${lastname}</h4>
-                            <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${count}</span>
+                            <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${userData.FirstName} ${userData.LastName}</h4>
+                            <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${transactionData.Count}</span>
                         </div>          
                         <div style="text-align:justify">
-                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${date}</time></p>
+                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${transactionData.Date}</time></p>
                         </div>          
                     </div>
                 </div>
-            </script>
+            </div>
         </div>
         
         <!---->

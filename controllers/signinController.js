@@ -9,9 +9,9 @@ mainApp.controller("signinController", function($scope)
             $("#signInBtn").attr("disabled", true);
 
             $.ajax({
-                url: 'http://safemooney.azurewebsites.net/api/account/login/',
-                type: 'POST',
-                dataType: 'json',
+                url: host + "/api/account/login/",
+                type: "POST",
+                dataType: "json",
                 data: {Username: form.username, Password: form.password },
                 success: function (data) 
                 {

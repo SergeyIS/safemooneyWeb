@@ -26,7 +26,7 @@ var dataheap = {
         setInterval(function()
         {
             $.ajax({
-                url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/fetch",
+                url: host+ "/api/" + auth.userId + "/transactions/fetch",
                 type: 'GET',
                 dataType: 'json',
                 beforeSend: function (xhr, settings) 
@@ -56,6 +56,38 @@ var dataheap = {
                     }
                 }
             });
+
+            $.ajax({
+                url: host + "/api/" + auth.userId + "/transactions/checkqueue",
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function (xhr, settings) 
+                {
+                    xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
+                },
+                success: function (data)
+                {
+                    notifyDataObject.isDataChanged = true;
+                    notifyDataObject.data = data;
+                },
+                error: function (jqXHR, textStatus, errorThrown) 
+                {
+                    if(jqXHR.status == 404)
+                    {
+                        notifyDataObject.isDataChanged = true;
+                        notifyDataObject.data = null;
+                    }
+                    else if(jqXHR.status != 200)
+                    {
+                        alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    }
+                    else
+                    {
+                        notifyDataObject.isDataChanged = true;
+                        notifyDataObject.data = jqXHR.responseText;
+                    }
+                }
+            });
         }, 5000);
     },
     search: function(text, auth)
@@ -64,7 +96,7 @@ var dataheap = {
         $("#loader").removeClass("hide");
         
         $.ajax({
-            url: "http://safemooney.azurewebsites.net/api/" + auth.userId + "/transactions/getuserlist?search="+text,
+            url: host + "/api/" + auth.userId + "/transactions/getuserlist?search="+text,
             type: 'GET',
             dataType: 'json',
             beforeSend: function (xhr, settings) 

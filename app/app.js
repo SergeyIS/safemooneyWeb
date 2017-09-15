@@ -32,3 +32,7 @@ mainApp.directive("bindConnect", function()
         }, 1000);
     }
 });
+
+//network configuration
+
+var host = "http://localhost:50266/";
