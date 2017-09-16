@@ -92,6 +92,9 @@ var dataheap = {
     },
     search: function(text, auth)
     {
+        if(text == "")
+            return;
+        
         //start animation
         $("#loader").removeClass("hide");
         
@@ -111,7 +114,7 @@ var dataheap = {
             },
             error: function (jqXHR, textStatus, errorThrown) 
             {
-                if(jqXHR.status == 404)
+                if(jqXHR.status == 404 || jqXHR.status == 400)
                 {
                     searchObject.isDataChanged = true;
                     searchObject.data = null;

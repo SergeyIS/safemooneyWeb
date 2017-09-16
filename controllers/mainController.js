@@ -11,7 +11,7 @@ mainApp.controller("mainController", function($scope)
             url: "http://safemooney.azurewebsites.net/api/"+id+"/account/logout",
             type: 'GET',
             dataType: 'json',
-            beforeSend: function (xhr, settings) 
+            beforeSend: function (xhr, settings)
             {
                 xhr.setRequestHeader('Authorization', 'Basic ' + token);
             },
@@ -19,7 +19,7 @@ mainApp.controller("mainController", function($scope)
             {
                 location.href = "signin.html";
             },
-            error: function (jqXHR, textStatus, errorThrown) 
+            error: function (jqXHR, textStatus, errorThrown)
             {
                 if(jqXHR.status != 200)
                 {
@@ -31,11 +31,5 @@ mainApp.controller("mainController", function($scope)
                 }
             }
         });
-    }
-    var isInput = false;
-    var text = "";
-    var buf = "";
-    $scope.test = function($event){
-        
     }
 });
