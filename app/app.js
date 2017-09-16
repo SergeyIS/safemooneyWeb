@@ -17,8 +17,13 @@ mainApp.directive("bindConnect", function()
             
             if(conf.isDataChanged)
             {
-                if(conf.data == null)
+                if(conf.data == null || conf.data == "")
+                {
                     element.empty();
+                    conf.isDataChanged = false;
+                    return;
+                }
+                    
 
                 if(conf.data == undefined || conf.templateId == null || conf.templateId == undefined)
                     return;

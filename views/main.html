@@ -44,6 +44,10 @@
             .hide{
                 display: none;
             }
+            .visibility
+            {
+                visibility: hidden;
+            }
             .transp{
                 opacity: 0.6;
             }
@@ -185,10 +189,10 @@
                             </div>
                         </div>
                     </div>
-                    <div style="width: 50px; margin-left: 5px; padding: 2px;" >
+                    <div id="tr-menu-${transactionData.Id}" style="width: 50px; margin-left: 5px; padding: 2px;" >
                         <div class="uk-animation-toggle">
                             <div class="uk-animation-scale-down">
-                                <div class="uk-card uk-card-default" uk-icon="icon: check" style="padding: 2px; height: 33%"></div>
+                                <div class="uk-card uk-card-default" uk-icon="icon: check" style="padding: 2px; height: 33%" onclick="closeTransaction(${transactionData.Id})"></div>
                             </div>
                         </div>
                         <div class="uk-animation-toggle" >
@@ -215,10 +219,11 @@
                             if(to == usr1)
                             {
                                 $("#lb-${transactionData.Id}").addClass("uk-label-warning");
+                                $("#tr-menu-${transactionData.Id}").addClass("visibility");
                             }
                             else
                             {
-                                $("#lb-${transactionData.Id}").addClass("uk-label-success");                              
+                                $("#lb-${transactionData.Id}").addClass("uk-label-success");                        
                             }
 
                             if($("#ispermited-${transactionData.Id}").text().toLowerCase() == "false")
@@ -272,7 +277,7 @@
 
                 $("body").addClass("progress");
                 $.ajax({
-                    url: "http://safemooney.azurewebsites.net/api/"+id+"/transactions/confirm/"+transId,
+                    url: host + "/api/"+ id + "/transactions/confirm/" + transId,
                     type: 'GET',
                     dataType: 'json',
                     beforeSend: function (xhr, settings)
@@ -289,16 +294,48 @@
                         {
                             alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
                         }
-                        else
-                        {
-                            $("body").removeClass("progress");
-                        }
+
+                        $("body").removeClass("progress");
                     }
                 });
             }
             function notifyCancel(transId)
             {
                 alert("Sorry, but this functionality is not implemented yet");
+            }
+
+            function closeTransaction(transId)
+            {
+                var id = localStorage.getItem("userId");
+                var token = localStorage.getItem("token");
+
+                if(id == undefined || id == null || token == undefined || token == null)
+                    return;
+
+                $("body").addClass("progress");
+
+                $.ajax({
+                    url: host + "/api/" + id + "/transactions/close/" + transId,
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function (xhr, settings)
+                    {
+                        xhr.setRequestHeader('Authorization', 'Basic ' + token);
+                    },
+                    success: function (data)
+                    {
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown)
+                    {
+                        if(jqXHR.status != 200)
+                        {
+                            alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                        }
+                        
+                        $("body").removeClass("progress");
+                    }
+                });
             }
         </script>
     </body>
