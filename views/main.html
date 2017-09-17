@@ -8,7 +8,9 @@
         <script src="../lib/uikit.min.js"></script>
         <script src="../lib/uikit-icons.min.js"></script>
         <script src="../lib/jquery.tmpl.min.js"></script>
+        <script src="../lib/jquery.validate.min.js"></script>
         <script src="../lib/angular.min.js"></script>
+        <script src="../lib/date.js"></script>
         <script src="../app/dataheap.js"></script>
         <script src="../app/app.js"></script>
         <script src="../controllers/mainController.js"></script>
@@ -33,7 +35,7 @@
                 dataheap.search(input.value, auth);
                 setTimeout(function(){
                     dataheap.cleanSrc();
-                }, 10000);
+                }, 100000);
             }
             input.addEventListener('input', test.debounce(500));
             });
@@ -119,42 +121,143 @@
 
         <!---->
         <div style="display: none">
-            <script id="usrTmpl" type="text/x-jquery-tmpl">
+            
+            <div id="usrTmpl" type="text/x-jquery-tmpl">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
-                    <div class="" style="width: 50px; padding: 2px; margin-top: 0">
+                    
+                    <div id="usr-menu-${UserId}" class="visibility" style="width: 50px; padding: 2px; margin-top: 0">
                         <div class="uk-animation-toggle" >
                             <div class="uk-animation-scale-down">
-                                <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;"></div>
+                                <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;" onclick="submit(${UserId})"></div>
                             </div>
                         </div>
                         <div class="uk-animation-toggle" >
                             <div class="uk-animation-scale-down">
-                                <div class="uk-card uk-card-default"  uk-icon="icon: ban" style="padding: 2px; margin: 5% 0;"></div>
+                                <div class="uk-card uk-card-default"  uk-icon="icon: close" style="padding: 2px; margin: 5% 0;" onclick="closeMenu(${UserId})"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="uk-width-expand" style="padding: 0">
-                    <div class="uk-card uk-card-default">
-                    <div class="uk-card-header" style="padding: 5px 20px">
-                        <div class="uk-grid-small uk-flex-middle" uk-grid>
-                            <div class="uk-width-expand">
-                                <div style="text-align:justify">
-                                    <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
-                                </div>          
-                                <div style="text-align:justify">
-                                    <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${Username}</p>
-                                </div>          
-                                
-                            </div>
-                            <div class="uk-width-auto">
-                                <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+
+                    <div class="uk-width-expand" style="padding: 0" onclick="openMenu(${UserId})">
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-header" style="padding: 5px 20px">
+                                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                                    <div class="uk-width-expand">
+                                        <div style="text-align:justify">
+                                            <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
+                                        </div>          
+                                        <div style="text-align:justify">
+                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">@${Username}</p>
+                                        </div>          
+                                        
+                                    </div>
+                                    <div class="uk-width-auto">
+                                        <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <form id="usr-form-${UserId}" class="uk-card uk-card-default hide" style="padding: 5px 20px">
+                            <fieldset class="uk-fieldset">
+                        
+                                <legend class="uk-legend">Add a loan</legend>
+                        
+                                <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+                                    <div class="uk-width-expand" style="margin-right: 5px">
+                                        <div class="uk-margin">
+                                            <input name="count" class="uk-input required count" type="text" placeholder="Amount of credit">
+                                        </div>
+                                    </div>
+                                    <div style="width: 50px; padding: 0; margin: 0">
+                                        <div class="uk-margin">
+                                            <select name="currency" class="uk-select">
+                                                <option>$</option>
+                                                <option>P.</option>
+                                                <option>€</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                        
+                                <div class="uk-margin">
+                                    <div id="per-out-${UserId}" class="uk-text-meta">days: </div>
+                                    <input id="per-in-${UserId}" name="period" class="uk-range period" type="range" value="30" min="0" max="100" step="1"  onmousemove="changePeriod(${UserId})">
+                                </div>
+
+                                <div class="uk-margin">
+                                    <textarea class="uk-textarea" rows="5" placeholder="Write your comment here" style="resize: none"></textarea>
+                                </div>                 
+                            </fieldset>
+                        </form>
                     </div>
+
+                    <script>
+                            function openMenu(id)
+                            {
+                                $("#usr-menu-" + id).removeClass("visibility");
+                                $("#usr-form-" + id).removeClass("hide");
+                            }
+        
+                            function closeMenu(id)
+                            {
+                                $("#usr-menu-" + id).addClass("visibility");
+                                $("#usr-form-" + id).addClass("hide");
+                            }
+                            function changePeriod(id)
+                            {
+                                $("#per-out-" + id).text("days: " + $("#per-in-" + id).val());
+                            }
+
+                            function submit(id)
+                            {
+                                var form = $("#usr-form-" + id);
+
+                                //todo: validate form
+
+                                var auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
+                                if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
+                                    return;
+
+                                var obj = {
+                                    userId: id,
+                                    count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
+                                    date: (new Date()).toString("dd.MM.yyyy"),
+                                    period: form.find("input[name=period]").val()
+                                };
+
+                                $("body").addClass("progress");
+
+                                $.ajax({
+                                    url: host + "/api/" + auth.id + "/transactions/add",
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: obj,
+                                    beforeSend: function (xhr, settings)
+                                    {
+                                        xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
+                                    },
+                                    success: function (data)
+                                    {
+                                        $("body").removeClass("progress");
+                                    },
+                                    error: function (jqXHR, textStatus, errorThrown)
+                                    {
+                                        if(jqXHR.status != 200)
+                                        {
+                                            alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                                        }
+                                        
+                                        $("body").removeClass("progress");
+                                    }
+                                });   
+                            }
+                    </script>
                 </div>
-                </div>
-                </div>
-            </script>
+
+                
+
+            </div>
     
             <div id="trlTmp" type="text/x-jquery-tmpl">
                 <div id="tr-${transactionData.Id}" class="uk-margin-small-bottom" uk-grid>
