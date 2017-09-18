@@ -123,9 +123,9 @@
         <div style="display: none">
             
             <div id="usrTmpl" type="text/x-jquery-tmpl">
-                <div class="uk-grid-small uk-flex-middle" uk-grid>
+                <div id="usr-${UserId}" class="uk-grid-small uk-flex-middle" uk-grid>
                     
-                    <div id="usr-menu-${UserId}" class="visibility" style="width: 50px; padding: 2px; margin-top: 0">
+                    <div id="usr-menu-${UserId}" class="visibility" style="width: 50px; padding: 2px; margin-top: -70%;">
                         <div class="uk-animation-toggle" >
                             <div class="uk-animation-scale-down">
                                 <div class="uk-card uk-card-default"  uk-icon="icon: chevron-right" style="padding: 2px;" onclick="submit(${UserId})"></div>
@@ -161,12 +161,12 @@
                         <form id="usr-form-${UserId}" class="uk-card uk-card-default hide" style="padding: 5px 20px">
                             <fieldset class="uk-fieldset">
                         
-                                <legend class="uk-legend">Add a loan</legend>
+                                <legend class="uk-legend" style="margin: 10px 0px">Add a loan</legend>
                         
                                 <div class="uk-child-width-1-2 uk-text-center" uk-grid>
                                     <div class="uk-width-expand" style="margin-right: 5px">
                                         <div class="uk-margin">
-                                            <input name="count" class="uk-input required count" type="text" placeholder="Amount of credit">
+                                            <input id="usr-cnt-${UserId}" name="count" class="uk-input" type="text" placeholder="Amount of credit">
                                         </div>
                                     </div>
                                     <div style="width: 50px; padding: 0; margin: 0">
@@ -181,7 +181,7 @@
                                 </div>
                         
                                 <div class="uk-margin">
-                                    <div id="per-out-${UserId}" class="uk-text-meta">days: </div>
+                                    <div id="per-out-${UserId}" class="uk-text-meta uk-text-middle uk-text-left">DAYS: 30</div>
                                     <input id="per-in-${UserId}" name="period" class="uk-range period" type="range" value="30" min="0" max="100" step="1"  onmousemove="changePeriod(${UserId})">
                                 </div>
 
@@ -206,27 +206,57 @@
                             }
                             function changePeriod(id)
                             {
-                                $("#per-out-" + id).text("days: " + $("#per-in-" + id).val());
+                                $("#per-out-" + id).text("DAYS: " + $("#per-in-" + id).val());
                             }
 
                             function submit(id)
                             {
-                                var form = $("#usr-form-" + id);
+                                var form = null;
+                                var auth = null;
+                                var obj = null;
 
-                                //todo: validate form
-
-                                var auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
-                                if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
+                                try
+                                {
+                                    form = $("#usr-form-" + id);
+                                    auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
+                                    if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
                                     return;
 
-                                var obj = {
-                                    userId: id,
-                                    count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
-                                    date: (new Date()).toString("dd.MM.yyyy"),
-                                    period: form.find("input[name=period]").val()
-                                };
+                                    obj = {
+                                        userId: id,
+                                        count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
+                                        countVal: form.find("input[name=count]").val(),
+                                        date: (new Date()).toString("dd.MM.yyyy"),
+                                        period: form.find("input[name=period]").val()
+                                    };
 
-                                $("body").addClass("progress");
+                                    //custom validation
+                                    if(obj.userId < 0)
+                                    {
+                                        alert("Internal error");
+                                        return;
+                                    }
+
+                                    if(( obj.countVal == "") || isNaN(obj.countVal))
+                                    {
+                                        $("#usr-cnt-" + id).addClass("uk-form-danger");
+                                        $("#usr-cnt-" + id).attr("uk-tooltip");
+                                        $("#usr-cnt-" + id).attr("title", "Please, check the correctness of the input");
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        $("#usr-cnt-" + id).removeClass("uk-form-danger");
+                                        $("#usr-cnt-" + id).removeAttr("uk-tooltip");
+                                        $("#usr-cnt-" + id).removeAttr("title");
+                                        
+                                    }
+                                    //custom validation
+
+                                    //hide user
+                                    setTimeout(function(){$("#usr-" + id).addClass("hide");}, 500)
+
+                                    $("body").addClass("progress");
 
                                 $.ajax({
                                     url: host + "/api/" + auth.id + "/transactions/add",
@@ -250,13 +280,16 @@
                                         
                                         $("body").removeClass("progress");
                                     }
-                                });   
+                                }); 
+                                    
+                                }
+                                catch(e)
+                                {
+                                    alert("Internal error");
+                                }
                             }
                     </script>
                 </div>
-
-                
-
             </div>
     
             <div id="trlTmp" type="text/x-jquery-tmpl">
