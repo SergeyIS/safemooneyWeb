@@ -186,7 +186,7 @@
                                 </div>
 
                                 <div class="uk-margin">
-                                    <textarea class="uk-textarea" rows="5" placeholder="Write your comment here" style="resize: none"></textarea>
+                                    <textarea name="comment" class="uk-textarea" rows="5" placeholder="Write your comment here" style="resize: none"></textarea>
                                 </div>                 
                             </fieldset>
                         </form>
@@ -227,7 +227,8 @@
                                         count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
                                         countVal: form.find("input[name=count]").val(),
                                         date: (new Date()).toString("dd.MM.yyyy"),
-                                        period: form.find("input[name=period]").val()
+                                        period: form.find("input[name=period]").val(),
+                                        comment: form.find("textarea[name=comment]").val()
                                     };
 
                                     //custom validation
@@ -319,8 +320,7 @@
                                 </div>
                             </div>
                             <div class="uk-card-body uk-text-small uk-text-meta">
-                                <p>${comment}
-                                    Раздел машинного обучения, с одной стороны, образовался в результате разделения науки о нейросетях на методы обучения сетей и виды топологий их архитектуры, с другой стороны - вобрал в себя методы математической статистики.
+                                <p>${transactionData.Comment}
                                 </p>
                             </div>
                         </div>
