@@ -39,4 +39,13 @@ mainApp.controller("signinController", function($scope)
         }
         
     }; 
+
+    $scope.authorize = function()
+    {
+        $("#loader").removeClass("hidde");
+        $("#signInBtn").attr("disabled", true);
+
+        location.href = "https://oauth.vk.com/authorize?client_id=6190519&display=page&redirect_uri=http://localhost:50266/api/oauth/signin&scope=friends&response_type=code&v=5.68";
+        
+    }
 });
