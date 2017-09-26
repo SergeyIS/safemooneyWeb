@@ -103,7 +103,7 @@
                     <input id="srcPanel" class="uk-search-input" type="search" placeholder="Search..." style="height: 40px;">
                 </form>
                 <div id="loader" class="uk-width-auto hide">
-                    <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                    <img class="uk-border-circle" width="40" height="40" src="/resources/loader.gif">
                 </div>
                 
                 <div id="usrContainer" bind-connect="searchData" style="margin-top: 30px;"></div>
@@ -134,12 +134,12 @@
                                         <h4 class="uk-text-small" style="display: inline; margin-left: auto;">{{account.userdata.firstname}} {{account.userdata.lastname}}</h4>
                                     </div>    
                                     <div style="text-align:justify">
-                                        <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><span>&#64</span>{{account.userdata.username}}</p>
+                                        <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><span>&#64;</span>{{account.userdata.username}}</p>
                                     </div>          
                                     
                                 </div>
                                 <div class="uk-width-auto">
-                                    <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                    <img class="uk-border-circle" width="40" height="40" src="/resources/loader.gif">
                                 </div>
                             </div>
                         </div>
@@ -265,12 +265,12 @@
                                             <h4 class="uk-text-small" style="display: inline; margin-left: auto;">${FirstName} ${LastName}</h4>
                                         </div>          
                                         <div style="text-align:justify">
-                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">${Username}</p>
+                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;">&#64;${Username}</p>
                                         </div>          
                                         
                                     </div>
                                     <div class="uk-width-auto">
-                                        <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                        <img class="uk-border-circle" width="40" height="40" src="/resources/loader.gif">
                                     </div>
                                 </div>
                             </div>
@@ -426,14 +426,14 @@
                                             <span id="lb-${transactionData.Id}" class="uk-label" style="display: inline; margin: auto 10px;">${transactionData.Count}</span>
                                         </div>
                                         <div style="text-align:justify">
-                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${transactionData.Date}</time></p>
+                                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time>${transactionData.Date}</time></p>
                                             <span class="uk-margin-small-right" style="display: inline; float: right">details</span>
                                             
                                         </div>          
                                         
                                     </div>
                                     <div class="uk-width-auto">
-                                        <img class="uk-border-circle" width="40" height="40" src="../res/loader.gif">
+                                        <img class="uk-border-circle" width="40" height="40" src="/resources/loader.gif">
                                     </div>
                                 </div>
                             </div>
@@ -511,7 +511,7 @@
                             <span class="uk-label uk-label-success" style="display: inline; margin: auto 10px;">${transactionData.Count}</span>
                         </div>          
                         <div style="text-align:justify">
-                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time datetime="2016-04-01T19:00">${transactionData.Date}</time></p>
+                            <p class="uk-text-meta uk-margin-remove-top uk-text-left" style="display: inline;"><time>${transactionData.Date}</time></p>
                         </div>          
                     </div>
                 </div>

@@ -22,7 +22,7 @@ mainApp.controller("signinController", function($scope)
                     localStorage.setItem("token", data["Access_Token"]);
 
                     $("#loader").addClass("hidde");
-                    location.href = "main.html";
+                    location.href = "main";
                 },
                 error: function (jqXHR, textStatus, errorThrown) 
                 {

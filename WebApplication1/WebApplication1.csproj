@@ -119,7 +119,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Resources\f.png" />
-    <Content Include="Resources\g+.png" />
+    <Content Include="Resources\google.png" />
     <Content Include="Resources\loader.gif" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\typing.gif" />
