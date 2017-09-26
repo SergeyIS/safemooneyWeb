@@ -27,7 +27,7 @@ mainApp.controller("mainController", function($scope)
                 }
                 else
                 {
-                    location.href = "signin.html";
+                    location.href = "signin";
                 }
             }
         });
