@@ -17,7 +17,7 @@ mainApp.controller("mainController", function($scope)
             },
             success: function (data)
             {
-                location.href = "signin.html";
+                location.href = "signin";
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
