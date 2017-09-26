@@ -3,37 +3,51 @@ mainApp.controller("signupController", function($scope)
 {
     $scope.signUp = function(form)
     {
-        //play download animation
-        $("#loader").removeClass("hidde");
-        $("#signUpBtn").attr("disabled", true);
-        //request
-        $.ajax({
-            url: host + "/api/account/signup/",
-            type: "POST",
-            dataType: "json",
-            data: {
-                    Username: form.username,
-                    Password: form.password,
-                    FirstName: form.firstname,
-                    LastName: form.lastname
-                 },
-            success: function (data) 
-            {
-                tryLogin(form.username, form.password);
-            },
-            error: function (jqXHR, textStatus, errorThrown) 
-            {
-                if(jqXHR.status != 200)
-                {
-                    alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
-                    $("#signUpBtn").attr("disabled", false);
-                }
-                else
+        try
+        {
+            //play download animation
+            $("#loader").removeClass("hidde");
+            $("#signUpBtn").attr("disabled", true);
+
+            //request
+            $.ajax({
+                url: host + "/api/account/signup/",
+                type: "POST",
+                dataType: "json",
+                data: {
+                        Username: form.username,
+                        Password: form.password,
+                        FirstName: form.firstname,
+                        LastName: form.lastname
+                    },
+                success: function (data) 
                 {
                     tryLogin(form.username, form.password);
+                },
+                error: function (jqXHR, textStatus, errorThrown) 
+                {
+                    if(jqXHR.status != 200)
+                    {
+                        alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                        $("#signUpBtn").attr("disabled", false);
+                        $("#loader").addClass("hidde");
+                    }
+                    else
+                    {
+                        tryLogin(form.username, form.password);
+                    }
                 }
-            }
-        });
+            });
+        }
+        catch(e)
+        {
+            //stop download animation
+            $("#loader").addClass("hidde");
+            $("#signUpBtn").attr("disabled", false);
+        }
+        
+
+        
         
     }; 
 });
