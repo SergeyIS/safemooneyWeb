@@ -24,6 +24,8 @@ mainApp.controller("mainController", function($scope)
                 if(jqXHR.status != 200)
                 {
                     alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    if (jqXHR.status == 401)
+                        location.href = "./signin"
                 }
                 else
                 {
@@ -67,6 +69,8 @@ mainApp.controller("mainController", function($scope)
             error: function (jqXHR, textStatus, errorThrown)
             {
                 alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                if(jqXHR.status == 401)
+                    location.href = "./signin"
             }
         });
     };
@@ -93,6 +97,8 @@ mainApp.controller("mainController", function($scope)
                 if(jqXHR.status != 200)
                 {
                     alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    if (jqXHR.status == 401)
+                        location.href = "./signin"
                 }
                 else
                 {

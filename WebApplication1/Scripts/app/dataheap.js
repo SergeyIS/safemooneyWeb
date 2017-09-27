@@ -48,6 +48,8 @@ var dataheap = {
                     else if(jqXHR.status != 200)
                     {
                         alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                        if (jqXHR.status == 401)
+                            location.href = "./signin"
                     }
                     else
                     {
@@ -80,6 +82,8 @@ var dataheap = {
                     else if(jqXHR.status != 200)
                     {
                         alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                        if (jqXHR.status == 401)
+                            location.href = "./signin"
                     }
                     else
                     {
@@ -122,6 +126,8 @@ var dataheap = {
                 else if(jqXHR.status != 200)
                 {
                     alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    if (jqXHR.status == 401)
+                        location.href = "./signin"
                 }
                 else
                 {

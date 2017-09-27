@@ -25,5 +25,11 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult EmptyQuery()
+        {
+            return Redirect("./web/signin");
+        }
     }
 }

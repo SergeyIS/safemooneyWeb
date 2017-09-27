@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="uk-background-muted" ng-app="mainApp" style="background-color: rgb(240, 240, 240)">
+<html class="uk-background-muted" ng-app="mainApp" style="background-color: rgb(240, 240, 240); min-width: 1024px;">
     <head>
         <title>Main</title>
         <link rel="stylesheet" href="/css/uikit.min.css" />
@@ -16,6 +16,13 @@
         <script src="/scripts/controllers/mainController.js"></script>
 
         <script>
+            function CheckForUserData(){
+                var token = localStorage.getItem("token");
+                if(token == null || token == undefined)
+                    location.href = "./signin";
+            };
+            CheckForUserData();
+
             (function(Function_prototype) {
                 Function_prototype.debounce = function(delay, ctx) {
                     var fn = this, timer;
