@@ -34,9 +34,9 @@ mainApp.controller("mainController", function($scope)
     }
     $scope.account = {
         userdata : {
-            firstname: "Sergey",
-            lastname: "Sidorov",
-            username: "SergeyIS",
+            firstname: localStorage.getItem("firstName"),
+            lastname: localStorage.getItem("lastName"),
+            username: localStorage.getItem("username"),
             oldpassword : "",
             newpassword: ""
         }

@@ -123,6 +123,7 @@
     <Content Include="Resources\loader.gif" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\typing.gif" />
+    <Content Include="Resources\user.png" />
     <Content Include="Resources\vk.png" />
     <Content Include="Scripts\app\app.js" />
     <Content Include="Scripts\app\dataheap.js" />
