@@ -29,7 +29,7 @@ namespace WebApplication1.Controllers
         [HttpGet]
         public ActionResult EmptyQuery()
         {
-            return Redirect("./web/signin");
+            return Redirect("./web/main");
         }
     }
 }

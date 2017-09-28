@@ -107,5 +107,17 @@ mainApp.controller("mainController", function($scope)
             }
         });
     }
+
+    $scope.changeSearchMode = function (switcherId,elementId, mode) {
+
+        $("#" + switcherId).children("a").each(function (index, value) {
+            if ($(this).is(".uk-card-primary")) {
+                $(this).removeClass("uk-card-primary");
+            }
+                
+        });
+
+        $("#" + elementId).addClass("uk-card-primary");
+    };
     
 });
