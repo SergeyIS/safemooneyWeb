@@ -102,3 +102,11 @@ D:\dev\safemooneyWeb\WebApplication1\bin\ru\System.Web.Mvc.resources.dll
 D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.dll
 D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.pdb
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.Resources.Localization.resources
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.csproj.GenerateResource.Cache
+D:\dev\safemooneyWeb\WebApplication1\bin\ru\WebApplication1.resources.dll
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.Resources.Localization.ru.resources
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\ru\WebApplication1.resources.dll
+D:\dev\safemooneyWeb\WebApplication1\bin\zh\WebApplication1.resources.dll
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\WebApplication1.Resources.Localization.zh.resources
+D:\dev\safemooneyWeb\WebApplication1\obj\Debug\zh\WebApplication1.resources.dll

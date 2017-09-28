@@ -20,46 +20,46 @@
     <body>
         <form class="uk-align-center uk-width-1-4 uk-padding-small" ng-controller="signupController" style="margin-top: 5%">
                         
-            <div class="uk-text-lead uk-text-large uk-text-center">Create an Account</div>
+            <div class="uk-text-lead uk-text-large uk-text-center">@Resources.Localization.Create_account</div>
             
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" href="#" uk-icon="icon: pencil"></span>
-                    <input class="uk-input" type="text" ng-model="form.lastname" placeholder="Firstname" required>
+                    <input class="uk-input" type="text" ng-model="form.lastname" placeholder="@Resources.Localization.Firstname" required>
                 </div>
             </div>
         
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" href="#" uk-icon="icon: pencil"></span>
-                    <input class="uk-input" type="text" ng-model="form.firstname" placeholder="Lastname" required>
+                    <input class="uk-input" type="text" ng-model="form.firstname" placeholder="@Resources.Localization.Lastname" required>
                 </div>
             </div>
 
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" href="#" uk-icon="icon: pencil"></span>
-                    <input class="uk-input" type="text" ng-model="form.username" placeholder="Login" required>
+                    <input class="uk-input" type="text" ng-model="form.username" placeholder="@Resources.Localization.Login" required>
                 </div>
             </div>
 
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon" href="#" uk-icon="icon: pencil"></span>
-                    <input class="uk-input" type="password" ng-model="form.password" placeholder="Password" required>
+                    <input class="uk-input" type="password" ng-model="form.password" placeholder="@Resources.Localization.Password" required>
                 </div>
             </div>
         
             <div class="uk-margin uk-width-1-1">
                 <div class="uk-inline uk-width-1-1">
                     <span class="uk-form-icon " uk-icon="icon: lock"></span>
-                    <input class="uk-input" type="password" placeholder="Repeat password" required>
+                    <input class="uk-input" type="password" placeholder="@Resources.Localization.Repeat_pas" required>
                 </div>
             </div>
 
-            <button id="signUpBtn" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" ng-click="signUp(form)">Sign Up</button>
+            <button id="signUpBtn" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" ng-click="signUp(form)">@Resources.Localization.SignUp</button>
             
-            <div class="uk-text-meta uk-margin-small-top">If you have any questions or suggestions, please let us know <a>support@mail.com</a></div>
+            <div class="uk-text-meta uk-margin-small-top">@Resources.Localization.SupportCaption <a>support@mail.com</a></div>
 
             <div id="loader" class="hidde" style="background-image: url(/resources/loader.gif); width: 40px; height: 40px; margin:10px auto;"></div>
         </form>

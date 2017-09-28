@@ -138,8 +138,8 @@ var dataheap = {
             }
         });
     },
-
-    cleanSrc: function(){ searchObject.data = null; searchObject.isDataChanged = true; }
+    cleanSrc: function () { searchObject.data = null; searchObject.isDataChanged = true; },
+    searchMode: "global"
 };
 
 

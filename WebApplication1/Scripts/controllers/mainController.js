@@ -17,7 +17,7 @@ mainApp.controller("mainController", function($scope)
             },
             success: function (data)
             {
-                location.href = "signin";
+                location.href = "./signin";
             },
             error: function (jqXHR, textStatus, errorThrown)
             {
@@ -43,7 +43,6 @@ mainApp.controller("mainController", function($scope)
             newpassword: ""
         }
     };
-
     $scope.changeUserInfo = function(){
         
         var id = localStorage.getItem("userId");
@@ -74,7 +73,6 @@ mainApp.controller("mainController", function($scope)
             }
         });
     };
-
     $scope.changePassword = function(){
         var id = localStorage.getItem("userId");
         var token = localStorage.getItem("token");
@@ -107,17 +105,38 @@ mainApp.controller("mainController", function($scope)
             }
         });
     }
+    $scope.changeSearchMode = function (switcherId) {
 
-    $scope.changeSearchMode = function (switcherId,elementId, mode) {
-
-        $("#" + switcherId).children("a").each(function (index, value) {
-            if ($(this).is(".uk-card-primary")) {
-                $(this).removeClass("uk-card-primary");
-            }
-                
-        });
-
-        $("#" + elementId).addClass("uk-card-primary");
+        if(dataheap.searchMode == "global")
+        {
+            dataheap.searchMode = "local"
+            $("#" + switcherId).css("color", "#28a5f5");
+        }
+        else if(dataheap.searchMode == "local")
+        {
+            dataheap.searchMode = "global"
+            $("#" + switcherId).css("color", "#999999");
+        }
     };
-    
+    $scope.changeCulture = function (culture, item_id) {
+        
+        $.ajax({
+            url: "./changeculture?lang=" + culture,
+            type: 'GET',
+            dataType: 'json',
+            success: function (data) {
+                location.href = "./main";
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (jqXHR.status != 200) {
+                    alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                    if (jqXHR.status == 401)
+                        location.href = "./signin"
+                }
+                else {
+                    location.href = "./main";
+                }
+            }
+        });
+    };
 });
