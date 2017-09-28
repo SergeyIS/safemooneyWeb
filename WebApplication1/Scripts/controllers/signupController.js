@@ -69,7 +69,7 @@ function tryLogin(username, password)
                 localStorage.setItem("lastName", data["LastName"]);
                 localStorage.setItem("token", data["Access_Token"])
 
-                location.href = "main.html";
+                location.href = "./main";
                 $("#loader").addClass("hidde");
                 $("#signUpBtn").attr("disabled", false);
             },
