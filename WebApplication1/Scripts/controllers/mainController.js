@@ -139,4 +139,10 @@ mainApp.controller("mainController", function($scope)
             }
         });
     };
+    $scope.bindAccount = function () {
+        document.cookie = "userId=" + localStorage.getItem("userId");
+        alert(document.cookie);
+
+        location.href = "https://oauth.vk.com/authorize?client_id=6203708&display=page&redirect_uri=http://localhost:61795/web/bindaccount&scope=friends&response_type=code&v=5.68"
+    };
 });

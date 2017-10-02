@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Filters;
@@ -58,6 +60,39 @@ namespace WebApplication1.Controllers
             Response.Cookies.Add(cookie);
 
             return new HttpStatusCodeResult(200);
+        }
+
+        [HttpGet]
+        public ActionResult BindAccount(String code)
+        {
+            if (String.IsNullOrEmpty(code))
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+
+            //get cookie with userId
+            HttpCookie userIdCookie = Request.Cookies["userId"];
+            int idValue = -1;
+
+            if(userIdCookie == null || String.IsNullOrEmpty(userIdCookie.Value) || 
+                !Int32.TryParse(userIdCookie.Value, out idValue) || idValue < 0)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            //connect to remote server
+            String url = $"http://localhost:50266/api/{idValue}/services/vk/addservice?code={code}";
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            try
+            {
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (Exception e)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            }
+
+
+            return Redirect("/main");
         }
     }
 }
