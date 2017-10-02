@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Filters;
+using WebApplication1.Infrastructure;
 
 namespace WebApplication1.Controllers
 {
     [Culture]
     public class WebController : Controller
     {
+        private static RemoteConfig rmConfig;
+        
+        public static void Configure(RemoteConfig config)
+        {
+            rmConfig = config;
+        }
+
         [HttpGet]
         public ActionResult SignIn()
         {
@@ -43,7 +50,7 @@ namespace WebApplication1.Controllers
             List<string> cultures = new List<string>() { "ru", "en", "zh" };
             if (!cultures.Contains(lang))
             {
-                lang = "ru";
+                lang = "en";
             }
             // save our cookie
             HttpCookie cookie = Request.Cookies["lang"];
@@ -66,7 +73,7 @@ namespace WebApplication1.Controllers
         public ActionResult BindAccount(String code)
         {
             if (String.IsNullOrEmpty(code))
-                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             //get cookie with userId
             HttpCookie userIdCookie = Request.Cookies["userId"];
@@ -79,7 +86,7 @@ namespace WebApplication1.Controllers
             }
 
             //connect to remote server
-            String url = $"http://localhost:50266/api/{idValue}/services/vk/addservice?code={code}";
+            String url = $"{rmConfig.RemoteHost}/api/{idValue}/services/vk/addservice?code={code}";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             try
@@ -91,8 +98,7 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
             }
 
-
-            return Redirect("/main");
+            return Redirect("/web/main");
         }
     }
 }

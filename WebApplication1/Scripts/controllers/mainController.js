@@ -143,6 +143,7 @@ mainApp.controller("mainController", function($scope)
         document.cookie = "userId=" + localStorage.getItem("userId");
         alert(document.cookie);
 
+        //todo: use host parametr to provide data about current host
         location.href = "https://oauth.vk.com/authorize?client_id=6203708&display=page&redirect_uri=http://localhost:61795/web/bindaccount&scope=friends&response_type=code&v=5.68"
     };
 });
