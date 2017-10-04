@@ -315,125 +315,26 @@
                             </fieldset>
                         </form>
                     </div>
-
-                    <script>
-                            function openMenu(id)
-                            {
-                                $("#usr-menu-" + id).removeClass("visibility");
-                                $("#usr-form-" + id).removeClass("hide");
-                            }
-        
-                            function closeMenu(id)
-                            {
-                                $("#usr-menu-" + id).addClass("visibility");
-                                $("#usr-form-" + id).addClass("hide");
-                            }
-                            function changePeriod(id)
-                            {
-                                $("#per-out-" + id).text("DAYS: " + $("#per-in-" + id).val());
-                            }
-
-                            function submit(id)
-                            {
-                                var form = null;
-                                var auth = null;
-                                var obj = null;
-
-                                try
-                                {
-                                    form = $("#usr-form-" + id);
-                                    auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
-                                    if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
-                                    return;
-
-                                    obj = {
-                                        userId: id,
-                                        count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
-                                        countVal: form.find("input[name=count]").val(),
-                                        date: (new Date()).toString("dd.MM.yyyy"),
-                                        period: form.find("input[name=period]").val(),
-                                        comment: form.find("textarea[name=comment]").val()
-                                    };
-
-                                    //custom validation
-                                    if(obj.userId < 0)
-                                    {
-                                        alert("Internal error");
-                                        return;
-                                    }
-
-                                    if(( obj.countVal == "") || isNaN(obj.countVal))
-                                    {
-                                        $("#usr-cnt-" + id).addClass("uk-form-danger");
-                                        $("#usr-cnt-" + id).attr("uk-tooltip");
-                                        $("#usr-cnt-" + id).attr("title", "Please, check the correctness of the input");
-                                        return;
-                                    }
-                                    else
-                                    {
-                                        $("#usr-cnt-" + id).removeClass("uk-form-danger");
-                                        $("#usr-cnt-" + id).removeAttr("uk-tooltip");
-                                        $("#usr-cnt-" + id).removeAttr("title");
-                                        
-                                    }
-                                    //custom validation
-
-                                    //hide user
-                                    setTimeout(function(){$("#usr-" + id).addClass("hide");}, 500)
-
-                                    $("body").addClass("progress");
-
-                                $.ajax({
-                                    url: host + "/api/" + auth.id + "/transactions/add",
-                                    type: 'POST',
-                                    dataType: 'json',
-                                    data: obj,
-                                    beforeSend: function (xhr, settings)
-                                    {
-                                        xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
-                                    },
-                                    success: function (data)
-                                    {
-                                        $("body").removeClass("progress");
-                                    },
-                                    error: function (jqXHR, textStatus, errorThrown)
-                                    {
-                                        if(jqXHR.status != 200)
-                                        {
-                                            alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
-                                        }
-                                        
-                                        $("body").removeClass("progress");
-                                    }
-                                }); 
-                                    
-                                }
-                                catch(e)
-                                {
-                                    alert("Internal error");
-                                }
-                            }
-                    </script>
                 </div>
             </div>
     
             <div id="vkUsrTmpl" type="text/x-jquery-tmpl">
-                <div id="vkusr-${UserId}" class="uk-grid-small uk-flex-middle" uk-grid onclick="openVkMenu(${UserId})">
+                <div id="vkusr-${AuthorizationId}" class="uk-grid-small uk-flex-middle" uk-grid>
                     
-                    <div id="vkusr-menu-${UserId}" class="visibility" style="width: 50px; padding: 2px; margin-top: -70%;">
+                    <div id="vkusr-menu-${AuthorizationId}" class="visibility" style="width: 50px; padding: 2px; margin-top: -70%;">
                         <div class="uk-animation-toggle">
                             <div class="uk-animation-scale-down">
-                                <a class="uk-card uk-card-default" uk-icon="icon: chevron-right" style="padding: 2px;" onclick="submitVk(${UserId})"></a>
+                                <a class="uk-card uk-card-default" uk-icon="icon: chevron-right" style="padding: 2px;" onclick="submitVk(${AuthorizationId}, ${UserId})"></a>
                             </div>
                         </div>
                         <div class="uk-animation-toggle">
                             <div class="uk-animation-scale-down">
-                                <a class="uk-card uk-card-default" uk-icon="icon: close" style="padding: 2px; margin: 5% 0;" onclick="closeVkMenu(${UserId})"></a>
+                                <a class="uk-card uk-card-default" uk-icon="icon: close" style="padding: 2px; margin: 5% 0;" onclick="closeVkMenu(${AuthorizationId})"></a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="uk-width-expand">
+                    <div class="uk-width-expand" onclick="openVkMenu(${AuthorizationId})">
                         <div class="uk-card uk-card-default">
                             <div class="uk-card-header" style="padding: 5px 20px">
                                 <div class="uk-grid-small uk-flex-middle" uk-grid>
@@ -447,167 +348,64 @@
                                         <div style="text-align: justify">
                                             <p class="uk-text-meta" style="display: inline-block; margin: 0">&#64;${Username}</p>
                                             <div style="display: inline-block; margin-left: 20%">
-                                                <a id="vkusr-aval-${AuthorizationId}" style="background: url('/resources/vkbadge.png'); height: 24px; width: 24px; display: inline-block; background-repeat-x: no-repeat; color: rgba(0,0,0,0); text-decoration: none" hidden="hidden">only</a>
-                                                <a id="vkuser-invite-${AuthorizationId}" style="background: url('/resources/invitebadge.png'); height: 24px; width: 24px; display: inline-block; padding-left: 30px; background-repeat-x: no-repeat; margin-left: 10px; color: #999; text-decoration: none" hidden="hidden">invite</a>
+                                                <a id="vkuser-invite-${AuthorizationId}" style="background: url('/resources/vkbadge.png'); height: 24px; width: 24px; display: inline-block; padding-left: 30px; background-repeat-x: no-repeat; margin-left: 10px; color: #999; text-decoration: none" hidden="hidden">invite</a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <form id="vkusr-form-${AuthorizationId}" class="uk-card uk-card-default hide" style="padding: 5px 20px">
+                            <fieldset class="uk-fieldset">
+
+                                <legend class="uk-legend" style="margin: 10px 0px">@Resources.Localization.Add_loan</legend>
+
+                                <div class="uk-child-width-1-2 uk-text-center" uk-grid>
+                                    <div class="uk-width-expand" style="margin-right: 5px">
+                                        <div class="uk-margin">
+                                            <input id="vkusr-cnt-${AuthorizationId}" name="vkcount" class="uk-input" type="text" placeholder="@Resources.Localization.Amount_of_credit">
+                                        </div>
+                                    </div>
+                                    <div style="width: 50px; padding: 0; margin: 0">
+                                        <div class="uk-margin">
+                                            <select name="vkcurrency" class="uk-select">
+                                                <option>$</option>
+                                                <option>P.</option>
+                                                <option>€</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="uk-margin">
+                                    <div id="vkper-out-${UserId}" class="uk-text-meta uk-text-middle uk-text-left">@Resources.Localization.DAYS: 30</div>
+                                    <input id="vkper-in-${UserId}" name="vkperiod" class="uk-range period" type="range" value="30" min="0" max="100" step="1" onmousemove="changeVkPeriod(${UserId})">
+                                </div>
+
+                                <div class="uk-margin">
+                                    <textarea name="vkcomment" class="uk-textarea" rows="5" placeholder="@Resources.Localization.Write_comment" style="resize: none"></textarea>
+                                </div>
+                            </fieldset>
+                        </form>
                     </div>
-
-                    <form id="vkusr-form-${UserId}" class="uk-card uk-card-default hide" style="padding: 5px 20px">
-                        <fieldset class="uk-fieldset">
-
-                            <legend class="uk-legend" style="margin: 10px 0px">@Resources.Localization.Add_loan</legend>
-
-                            <div class="uk-child-width-1-2 uk-text-center" uk-grid>
-                                <div class="uk-width-expand" style="margin-right: 5px">
-                                    <div class="uk-margin">
-                                        <input id="vkusr-cnt-${UserId}" name="vkcount" class="uk-input" type="text" placeholder="@Resources.Localization.Amount_of_credit">
-                                    </div>
-                                </div>
-                                <div style="width: 50px; padding: 0; margin: 0">
-                                    <div class="uk-margin">
-                                        <select name="vkcurrency" class="uk-select">
-                                            <option>$</option>
-                                            <option>P.</option>
-                                            <option>€</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="uk-margin">
-                                <div id="vkper-out-${UserId}" class="uk-text-meta uk-text-middle uk-text-left">@Resources.Localization.DAYS: 30</div>
-                                <input id="vkper-in-${UserId}" name="vkperiod" class="uk-range period" type="range" value="30" min="0" max="100" step="1" onmousemove="changeVkPeriod(${UserId})">
-                            </div>
-
-                            <div class="uk-margin">
-                                <textarea name="comment" class="uk-textarea" rows="5" placeholder="@Resources.Localization.Write_comment" style="resize: none"></textarea>
-                            </div>
-                        </fieldset>
-                    </form>
-
                     <div style="display: none">
-                        <div id="vkusr-${UserId}-vkavailability">${Availability}</div>
-                        <div id="vkusr-${UserId}-vkauthorizationId">${AuthorizationId}</div>
+                        <div id="vkusr-${AuthorizationId}-vkavailability">${Availability}</div>
+                        <div id="vkusr-${AuthorizationId}-vkauthorizationId">${AuthorizationId}</div>
                     </div>
-                </div>
 
-                <script>
-
-                    function setr(){
-                        if($("#vkusr-${UserId}-vkavailability").text() == "true")
+                    <script>
+                        function changeVkUserView()
                         {
-                            $("#vkusr-aval-${AuthorizationId}").attr("hidden", "false");
-                            $("#vkuser-invite-${AuthorizationId}").attr("hidden", "false");
+                            if($("#vkusr-${AuthorizationId}-vkavailability").text() == "false")
+                            {
+                                $("#vkusr-aval-${AuthorizationId}").removeAttr("hidden");
+                                $("#vkuser-invite-${AuthorizationId}").removeAttr("hidden");
+                            }
                         }
-                    }
-                    setr();
-
-                    function openVkMenu(id)
-                    {
-                        if($("#vkavailability").text() == "false")
-                            return;
-
-                        $("#vkusr-menu-" + id).removeClass("visibility");
-                        $("#vkusr-form-" + id).removeClass("hide");
-                    }
-
-                    function closeVkMenu(id)
-                    {
-                        $("#vkusr-menu-" + id).addClass("visibility");
-                        $("#vkusr-form-" + id).addClass("hide");
-                    }
-                    function changeVkPeriod(id)
-                    {
-                        $("#vkper-out-" + id).text("DAYS: " + $("#vkper-in-" + id).val());
-                    }
-
-                    function submitVk(id)
-                    {
-                        var form = null;
-                        var auth = null;
-                        var obj = null;
-
-                        try
-                        {
-                            form = $("#vkusr-form-" + id);
-                            auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
-                            if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
-                            return;
-
-                            obj = {
-                                userId: id,
-                                count: form.find("input[name=vkcount]").val() + form.find("select[name=vkcurrency]").val(),
-                                countVal: form.find("input[name=vkcount]").val(),
-                                date: (new Date()).toString("dd.MM.yyyy"),
-                                period: form.find("input[name=vkperiod]").val(),
-                                comment: form.find("textarea[name=vkcomment]").val()
-                            };
-
-                            //custom validation
-                            if(obj.userId < 0)
-                            {
-                                alert("Internal error");
-                                return;
-                            }
-
-                            if(( obj.countVal == "") || isNaN(obj.countVal))
-                            {
-                                $("#vkusr-cnt-" + id).addClass("uk-form-danger");
-                                $("#vkusr-cnt-" + id).attr("uk-tooltip");
-                                $("#vkusr-cnt-" + id).attr("title", "Please, check the correctness of the input");
-                                return;
-                            }
-                            else
-                            {
-                                $("#vkusr-cnt-" + id).removeClass("uk-form-danger");
-                                $("#vkusr-cnt-" + id).removeAttr("uk-tooltip");
-                                $("#vkusr-cnt-" + id).removeAttr("title");
-
-                            }
-                            //custom validation
-
-                            //hide user
-                            setTimeout(function(){$("#vkusr-" + id).addClass("hide");}, 500)
-
-                            $("body").addClass("progress");
-
-                        $.ajax({
-                            url: host + "/api/" + auth.id + "/transactions/add",
-                            type: 'POST',
-                            dataType: 'json',
-                            data: obj,
-                            beforeSend: function (xhr, settings)
-                            {
-                                xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
-                            },
-                            success: function (data)
-                            {
-                                $("body").removeClass("progress");
-                            },
-                            error: function (jqXHR, textStatus, errorThrown)
-                            {
-                                if(jqXHR.status != 200)
-                                {
-                                    alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
-                                }
-
-                                $("body").removeClass("progress");
-                            }
-                        });
-
-                        }
-                        catch(e)
-                        {
-                            alert("Internal error");
-                        }
-                    }
-                </script>
-                
+                        changeVkUserView();
+                    </script>
+                </div>              
             </div>
 
             <div id="trlTmp" type="text/x-jquery-tmpl">
@@ -788,6 +586,201 @@
                         $("body").removeClass("progress");
                     }
                 });
+            }
+
+            function openVkMenu(authId)
+            {
+                if($("#vkusr-" + authId + "-vkavailability").text() == "false")
+                    return;
+
+                $("#vkusr-menu-" + authId).removeClass("visibility");
+                $("#vkusr-form-" + authId).removeClass("hide");
+            }
+
+            function closeVkMenu(authId)
+            {
+                $("#vkusr-menu-" + authId).addClass("visibility");
+                $("#vkusr-form-" + authId).addClass("hide");
+            }
+            function changeVkPeriod(id)
+            {
+                $("#vkper-out-" + id).text("DAYS: " + $("#vkper-in-" + id).val());
+            }
+
+            function submitVk(authId, userId)
+            {
+                var form = null;
+                var auth = null;
+                var obj = null;
+
+                try
+                {
+                    form = $("#vkusr-form-" + authId);
+                    auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
+                    if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
+                        return;
+
+                    obj = {
+                        userId: userId,
+                        count: form.find("input[name=vkcount]").val() + form.find("select[name=vkcurrency]").val(),
+                        countVal: form.find("input[name=vkcount]").val(),
+                        date: (new Date()).toString("dd.MM.yyyy"),
+                        period: form.find("input[name=vkperiod]").val(),
+                        comment: form.find("textarea[name=vkcomment]").val()
+                    };
+
+                    //custom validation
+                    if(obj.userId < 0)
+                    {
+                        alert("Internal error");
+                        return;
+                    }
+
+                    if(( obj.countVal == "") || isNaN(obj.countVal))
+                    {
+                        $("#vkusr-cnt-" + authId).addClass("uk-form-danger");
+                        $("#vkusr-cnt-" + authId).attr("uk-tooltip");
+                        $("#vkusr-cnt-" + authId).attr("title", "Please, check the correctness of the input");
+                        return;
+                    }
+                    else
+                    {
+                        $("#vkusr-cnt-" + authId).removeClass("uk-form-danger");
+                        $("#vkusr-cnt-" + authId).removeAttr("uk-tooltip");
+                        $("#vkusr-cnt-" + authId).removeAttr("title");
+
+                    }
+
+                    //hide user
+                    setTimeout(function(){$("#vkusr-" + authId).addClass("hide");}, 500)
+
+                    $("body").addClass("progress");
+
+                    $.ajax({
+                        url: host + "/api/" + auth.id + "/transactions/add",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: obj,
+                        beforeSend: function (xhr, settings)
+                        {
+                            xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
+                        },
+                        success: function (data)
+                        {
+                            $("body").removeClass("progress");
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            if(jqXHR.status != 200)
+                            {
+                                alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                            }
+
+                            $("body").removeClass("progress");
+                        }
+                    });
+                }
+                catch(e)
+                {
+                    alert("Internal error");
+                }
+            }
+
+            function openMenu(id)
+            {
+                $("#usr-menu-" + id).removeClass("visibility");
+                $("#usr-form-" + id).removeClass("hide");
+            }
+        
+            function closeMenu(id)
+            {
+                $("#usr-menu-" + id).addClass("visibility");
+                $("#usr-form-" + id).addClass("hide");
+            }
+            function changePeriod(id)
+            {
+                $("#per-out-" + id).text("DAYS: " + $("#per-in-" + id).val());
+            }
+
+            function submit(id)
+            {
+                var form = null;
+                var auth = null;
+                var obj = null;
+
+                try
+                {
+                    form = $("#usr-form-" + id);
+                    auth = {id: localStorage.getItem("userId"), token: localStorage.getItem("token")};
+                    if(auth.id == undefined || auth.id == null || auth.token == undefined || auth.token == null)
+                        return;
+
+                    obj = {
+                        userId: id,
+                        count: form.find("input[name=count]").val() + form.find("select[name=currency]").val(),
+                        countVal: form.find("input[name=count]").val(),
+                        date: (new Date()).toString("dd.MM.yyyy"),
+                        period: form.find("input[name=period]").val(),
+                        comment: form.find("textarea[name=comment]").val()
+                    };
+
+                    //custom validation
+                    if(obj.userId < 0)
+                    {
+                        alert("Internal error");
+                        return;
+                    }
+
+                    if(( obj.countVal == "") || isNaN(obj.countVal))
+                    {
+                        $("#usr-cnt-" + id).addClass("uk-form-danger");
+                        $("#usr-cnt-" + id).attr("uk-tooltip");
+                        $("#usr-cnt-" + id).attr("title", "Please, check the correctness of the input");
+                        return;
+                    }
+                    else
+                    {
+                        $("#usr-cnt-" + id).removeClass("uk-form-danger");
+                        $("#usr-cnt-" + id).removeAttr("uk-tooltip");
+                        $("#usr-cnt-" + id).removeAttr("title");
+                                        
+                    }
+                    //custom validation
+
+                    //hide user
+                    setTimeout(function(){$("#usr-" + id).addClass("hide");}, 500)
+
+                    $("body").addClass("progress");
+
+                    $.ajax({
+                        url: host + "/api/" + auth.id + "/transactions/add",
+                        type: 'POST',
+                        dataType: 'json',
+                        data: obj,
+                        beforeSend: function (xhr, settings)
+                        {
+                            xhr.setRequestHeader('Authorization', 'Basic ' + auth.token);
+                        },
+                        success: function (data)
+                        {
+                            $("body").removeClass("progress");
+                        },
+                        error: function (jqXHR, textStatus, errorThrown)
+                        {
+                            if(jqXHR.status != 200)
+                            {
+                                alert("There's some problem with your data or connection. Server returned status code: " + jqXHR.status);
+                            }
+                                        
+                            $("body").removeClass("progress");
+                        }
+                    }); 
+                                    
+                }
+                catch(e)
+                {
+                    alert("Internal error");
+                }
             }
         </script>
     </body>
