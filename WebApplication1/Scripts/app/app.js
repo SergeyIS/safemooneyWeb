@@ -37,7 +37,6 @@ mainApp.directive("bindConnect", function()
         }, 1000);
     }
 });
-
 //network configuration
-//var host = "http://localhost:50266";
-var host = "http://safemooney.azurewebsites.net";
+var host = "http://localhost:50266";
+//var host = "http://safemooney.azurewebsites.net";
