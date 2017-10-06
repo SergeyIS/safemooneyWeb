@@ -31,8 +31,12 @@ var dataheap = {
     notifyData: notifyDataObject,
     searchData: searchObject,
     vkSearchData: vkSearchObject,
-    startListening: function(auth) //Listen server for transactions and notifications
-    {
+    startListening: function (auth) //Listen server for transactions and notifications. Checking for availability
+    { 
+        var id = localStorage.getItem("userId");
+        var token = localStorage.getItem("token");
+
+        //start long running proccess
         setInterval(function()
         {
             $.ajax({

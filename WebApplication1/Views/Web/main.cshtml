@@ -47,6 +47,40 @@
             input.addEventListener('input', test.debounce(500));
             });
             
+            function checkForAvailability()
+            {
+                $.ajax({
+                    url: host + "/api/" + localStorage.getItem("userId") + "/services/vk/check",
+                    type: 'GET',
+                    dataType: 'json',
+                    beforeSend: function (xhr, settings) {
+                        xhr.setRequestHeader('Authorization', 'Basic ' + localStorage.getItem("token"));
+                    },
+                    success: function (data) {
+                        if(data == "true"){
+                            $("#bindBtn").addClass("visibility");
+                        }
+                        else{
+                            $("#bindsatae").addClass("visibility");
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        if (jqXHR.status != 200) {
+                            if (jqXHR.status == 401)
+                                location.href = "./signin"
+                        }
+                        else {
+                            if(jqXHR.responseText == "true"){
+                                $("#bindBtn").addClass("visibility");
+                            }
+                            else{
+                                $("#bindsatae").addClass("visibility");
+                            }
+                        }
+                    }
+                });
+            }
+            checkForAvailability();
         </script>
         
         <style>
@@ -213,9 +247,9 @@
                             <button id="cancelPassBtn" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom">@Resources.Localization.CANCEL</button>
                         </div>
                         
-            
                         <a id="bindBtn" class="uk-button uk-button-primary uk-width-1-1 uk-margin-small-bottom" ng-click="bindAccount()">@Resources.Localization.Link_to_vk_caption</a>
-                        <div class="uk-text-meta uk-margin-small-top uk-text-center">@Resources.Localization.Account_binding_state</div>
+                        <div id="bindsatae" class="uk-text-meta uk-margin-small-top uk-text-center">@Resources.Localization.Account_binding_state</div>
+                        
                         <div class="uk-text-meta uk-margin-small-top uk-text-center">@Resources.Localization.SupportCaption <a>support@mail.com</a></div>
             
                         <div id="loader" class="hide" style="background-image: url(/resources/loader.gif); width: 40px; height: 40px; margin:10px auto;"></div>
@@ -245,7 +279,6 @@
 
         <!---->
         <div style="display: none">
-            
             <div id="usrTmpl" type="text/x-jquery-tmpl">
                 <div id="usr-${UserId}" class="uk-grid-small uk-flex-middle" uk-grid>
                     
@@ -486,7 +519,6 @@
                     </script>
                 </div>
             </div>
-    
             <div id="ntfTmpl" type="text/x-jquery-tmpl">
                 <div class="uk-grid-small uk-flex-middle" uk-grid>
                     <div style="width: 50px; padding: 2px;" >
@@ -782,6 +814,8 @@
                     alert("Internal error");
                 }
             }
+
+
         </script>
     </body>
 </html>
