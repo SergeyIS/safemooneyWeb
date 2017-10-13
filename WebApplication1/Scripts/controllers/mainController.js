@@ -142,7 +142,7 @@ mainApp.controller("mainController", function($scope)
     $scope.bindAccount = function () {
         document.cookie = "userId=" + localStorage.getItem("userId");
         //todo: use host parametr to provide data about current host
-        location.href = "https://oauth.vk.com/authorize?client_id=6203708&display=page&redirect_uri=http://localhost:61795/web/bindaccount&scope=friends,offline&response_type=code&v=5.68"
+        location.href = "https://oauth.vk.com/authorize?client_id=6203708&display=page&redirect_uri=http://safemooneyweb.azurewebsites.net/web/bindaccount&scope=friends,offline&response_type=code&v=5.68"
     };
 
     $scope.sendInvention = function(email_id){
