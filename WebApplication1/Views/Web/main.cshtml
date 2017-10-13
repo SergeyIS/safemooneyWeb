@@ -381,7 +381,7 @@
                                         <div style="text-align: justify">
                                             <p class="uk-text-meta" style="display: inline-block; margin: 0">&#64;${Username}</p>
                                             <div style="display: inline-block; margin-left: 20%">
-                                                <a id="vkuser-invite-${AuthorizationId}" style="background: url('/resources/vkbadge.png'); height: 24px; width: 24px; display: inline-block; padding-left: 30px; background-repeat-x: no-repeat; margin-left: 10px; color: #999; text-decoration: none" hidden="hidden">invite</a>
+                                                <a id="vkuser-invite-${AuthorizationId}" style="background: url('/resources/vkbadge.png'); height: 24px; width: 24px; display: inline-block; padding-left: 30px; background-repeat-x: no-repeat; margin-left: 10px; color: #999; text-decoration: none" hidden="hidden" href="#modal-center" uk-toggle>invite</a>
                                             </div>
                                         </div>
                                     </div>
@@ -544,6 +544,22 @@
                         </div>        
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div id="modal-center" class="uk-flex-top" uk-modal>
+            <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                <form id="ivite-form" class="uk-align-center uk-width-1-1 uk-padding-small" ng-controller="mainController" style="margin-top: 5%" onsubmit="... return false;">
+                    <div class="uk-margin">
+                        <div class="uk-inline">
+                            <span class="uk-form-icon" href="#" uk-icon="icon: pencil"></span>
+                            <input id="invention-email" class="uk-input" type="email" placeholder="Email" required>
+                        </div>
+                    </div>
+                     
+                    <button class="uk-button uk-button-primary uk-margin-small-bottom uk-modal-close" ng-click="sendInvention('invention-email')">Send invention</button>
+
+                </form>
             </div>
         </div>
         <!---->
